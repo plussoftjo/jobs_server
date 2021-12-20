@@ -150,7 +150,7 @@ func RemovePosts(c *gin.Context) {
 // IndexPosts ..
 func IndexPosts(c *gin.Context) {
 	var data []models.Posts
-	config.DB.Find(&data)
+	config.DB.Order("id desc").Find(&data)
 
 	c.JSON(200, data)
 }
@@ -168,14 +168,13 @@ func IndexPagination(c *gin.Context) {
 		return
 	}
 
-	config.DB.Scopes(vendors.Paginate(page)).Find(&data)
+	config.DB.Scopes(vendors.Paginate(page)).Order("id desc").Find(&data)
 
 }
 
 type FilterTypes struct {
 	Search      string `json:"search"`
 	Nationality string `json"nationality"`
-	Gender      string `json:"gender"`
 	Tags        string `json:"tags"`
 }
 
@@ -197,11 +196,11 @@ func FilterResults(c *gin.Context) {
 
 	var data []models.Posts
 	config.DB.
-		Where("title LIKE %" + filter.Search + "%").
-		Where("gender LIKE %" + filter.Gender + "%").
-		Where("gender LIKE %" + filter.Nationality + "%").
-		Where("tags LIKE %" + filter.Tags + "%").
+		Where("title LIKE ?", "%"+filter.Search+"%").
+		Where("nationality = ?", filter.Nationality).
 		Scopes(vendors.Paginate(page)).Find(&data)
+
+	c.JSON(200, data)
 }
 
 // RandIndexPosts ..

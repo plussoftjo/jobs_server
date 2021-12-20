@@ -16,4 +16,5 @@ type PostsRequest struct {
 	Time        string `json:"time"`
 	Uri         string `json:"uri"`
 	UserID      uint   `json:"userID"`
+	User        User   `json:"user"`
 }

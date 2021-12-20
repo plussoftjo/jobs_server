@@ -148,7 +148,7 @@ func RemoveYoutubePosts(c *gin.Context) {
 // IndexYoutubePosts ..
 func IndexYoutubePosts(c *gin.Context) {
 	var data []models.YoutubePosts
-	config.DB.Find(&data)
+	config.DB.Order("id desc").Find(&data)
 
 	c.JSON(200, data)
 }

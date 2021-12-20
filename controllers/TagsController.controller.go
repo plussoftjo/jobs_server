@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// StorePostsRequest ..
-func StorePostsRequest(c *gin.Context) {
-	var data models.PostsRequest
+// StoreTags ..
+func StoreTags(c *gin.Context) {
+	var data models.Tags
 
 	c.ShouldBindJSON(&data)
 
@@ -23,16 +23,16 @@ func StorePostsRequest(c *gin.Context) {
 		return
 	}
 
-	var query models.PostsRequest
+	var query models.Tags
 	config.DB.Where("id = ?", data.ID).First(&query)
 
 	c.JSON(200, query)
 }
 
-// ShowPostsRequest ..
-func ShowPostsRequest(c *gin.Context) {
+// ShowTags ..
+func ShowTags(c *gin.Context) {
 	ID := c.Param("id")
-	var data models.PostsRequest
+	var data models.Tags
 
 	err := config.DB.Where("id = ?", ID).First(&data).Error
 	if err != nil {
@@ -46,10 +46,10 @@ func ShowPostsRequest(c *gin.Context) {
 	c.JSON(200, data)
 }
 
-// ShowNextPostsRequest ..
-func ShowNextPostsRequest(c *gin.Context) {
+// ShowNextTags ..
+func ShowNextTags(c *gin.Context) {
 	ID := c.Param("id")
-	var data models.PostsRequest
+	var data models.Tags
 
 	err := config.DB.Where("id > ?", ID).First(&data).Error
 	if err != nil {
@@ -63,10 +63,10 @@ func ShowNextPostsRequest(c *gin.Context) {
 	c.JSON(200, data)
 }
 
-// ShowPreviousPostsRequest ..
-func ShowPreviousPostsRequest(c *gin.Context) {
+// ShowPreviousTags ..
+func ShowPreviousTags(c *gin.Context) {
 	ID := c.Param("id")
-	var data models.PostsRequest
+	var data models.Tags
 
 	err := config.DB.Where("id < ?", ID).Last(&data).Error
 	if err != nil {
@@ -80,9 +80,9 @@ func ShowPreviousPostsRequest(c *gin.Context) {
 	c.JSON(200, data)
 }
 
-// ShowLastPostsRequest ..
-func ShowLastPostsRequest(c *gin.Context) {
-	var data models.PostsRequest
+// ShowLastTags ..
+func ShowLastTags(c *gin.Context) {
+	var data models.Tags
 
 	err := config.DB.Last(&data).Error
 	if err != nil {
@@ -96,9 +96,9 @@ func ShowLastPostsRequest(c *gin.Context) {
 	c.JSON(200, data)
 }
 
-// ShowFirstPostsRequest ..
-func ShowFirstPostsRequest(c *gin.Context) {
-	var data models.PostsRequest
+// ShowFirstTags ..
+func ShowFirstTags(c *gin.Context) {
+	var data models.Tags
 
 	err := config.DB.First(&data).Error
 	if err != nil {
@@ -112,9 +112,9 @@ func ShowFirstPostsRequest(c *gin.Context) {
 	c.JSON(200, data)
 }
 
-// UpdatePostsRequest ..
-func UpdatePostsRequest(c *gin.Context) {
-	var data models.PostsRequest
+// UpdateTags ..
+func UpdateTags(c *gin.Context) {
+	var data models.Tags
 	c.ShouldBindJSON(&data)
 
 	err := config.DB.Save(&data).Error
@@ -130,11 +130,11 @@ func UpdatePostsRequest(c *gin.Context) {
 	})
 }
 
-// RemovePostsRequest ..
-func RemovePostsRequest(c *gin.Context) {
+// RemoveTags ..
+func RemoveTags(c *gin.Context) {
 	ID := c.Param("id")
 
-	err := config.DB.Delete(&models.PostsRequest{}, ID).Error
+	err := config.DB.Delete(&models.Tags{}, ID).Error
 	if err != nil {
 		c.JSON(500, gin.H{
 			"err":  err.Error(),
@@ -145,10 +145,10 @@ func RemovePostsRequest(c *gin.Context) {
 	c.JSON(200, gin.H{"message": "success"})
 }
 
-// IndexPostsRequest ..
-func IndexPostsRequest(c *gin.Context) {
-	var data []models.PostsRequest
-	config.DB.Preload("User").Find(&data)
+// IndexTags ..
+func IndexTags(c *gin.Context) {
+	var data []models.Tags
+	config.DB.Find(&data)
 
 	c.JSON(200, data)
 }

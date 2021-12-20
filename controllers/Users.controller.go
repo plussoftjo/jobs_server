@@ -211,8 +211,3 @@ func ShowUser(c *gin.Context) {
 		"user": user,
 	})
 }
-
-// StoreNotification ..
-func StoreNotification() {
-	// Set here the notfication send
-}

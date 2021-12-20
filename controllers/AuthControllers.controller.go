@@ -120,8 +120,11 @@ func Auth(c *gin.Context) {
 		return
 	}
 
+	var USER models.User
+	config.DB.Where("id = ?", user.ID).Preload("Roles").Find(&USER)
+
 	c.JSON(200, gin.H{
-		"user": user,
+		"user": USER,
 	})
 }
 
@@ -233,7 +236,7 @@ func UpdateUser(c *gin.Context) {
 // UsersListIndex ..
 func UsersListIndex(c *gin.Context) {
 	var users []models.User
-	config.DB.Preload("Roles").Where("roles_id != ?", 0).Find(&users)
+	config.DB.Preload("Roles").Find(&users)
 	c.JSON(200, gin.H{
 		"users": users,
 	})

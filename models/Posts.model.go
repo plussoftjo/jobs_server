@@ -18,4 +18,5 @@ type Posts struct {
 	Time        string `json:"time"`
 	Tags        string `json:"tags"`
 	Uri         string `json:"uri"`
+	Type        string `json:"type"`
 }

@@ -111,5 +111,21 @@ func Setup() {
 	PostsRequest.GET("/showLast", controllers.ShowLastPostsRequest)
 	PostsRequest.GET("/index", controllers.IndexPostsRequest)
 
+	// --------- Tags ------- //
+	Tags := r.Group("/Tags")
+	Tags.POST("/store", controllers.StoreTags)
+	Tags.POST("/update", controllers.UpdateTags)
+	Tags.GET("/show/:id", controllers.ShowTags)
+	Tags.GET("/remove/:id", controllers.RemoveTags)
+	Tags.GET("/showPrevious/:id", controllers.ShowPreviousTags)
+	Tags.GET("/showNext/:id", controllers.ShowNextTags)
+	Tags.GET("/showFirst", controllers.ShowFirstTags)
+	Tags.GET("/showLast", controllers.ShowLastTags)
+	Tags.GET("/index", controllers.IndexTags)
+
+	notifications := r.Group("/notifications")
+	notifications.POST("/store", controllers.StoreNotification)
+	notifications.POST("/storeNotification", controllers.StoreNotificationToken)
+
 	r.Run(":8082")
 }

@@ -32,6 +32,7 @@ func SetupDB() {
 	database.AutoMigrate(&models.Posts{})
 	database.AutoMigrate(&models.PostsRequest{})
 	database.AutoMigrate(&models.YoutubePosts{})
+	database.AutoMigrate(&models.Tags{})
 
 	DB = database
 }
