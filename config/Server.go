@@ -14,8 +14,8 @@ var ServerInfo Server
 
 // ServerInformations ..
 func ServerInformations() Server {
-	dev := true
-	serverName := "erc"
+	dev := false
+	serverName := "jobs"
 
 	var publicPath string
 	var serverURI string
@@ -25,7 +25,7 @@ func ServerInformations() Server {
 
 	} else {
 		publicPath = "/var/www/" + serverName + "/"
-		serverURI = "http://35.232.199.110:8082/"
+		serverURI = "http://13.36.230.155:3002/"
 	}
 
 	ServerInfo = Server{

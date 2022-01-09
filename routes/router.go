@@ -128,5 +128,5 @@ func Setup() {
 	notifications.POST("/store", controllers.StoreNotification)
 	notifications.POST("/storeNotification", controllers.StoreNotificationToken)
 
-	r.Run(":8082")
+	r.Run(":3002")
 }
