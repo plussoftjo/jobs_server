@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>منصة تطوع</title>
+  </head>
+  <body>
+    <div>
+      <h1 id="element"></h1>
+    </div>
+    <script>
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Huawei Phone must come first because its UA also contains "Android"
+      if (userAgent.includes("HUAWEI")) {
+        console.log("huawei");
+        document.getElementById("element").innerHTML = "huawei";
+        window.location = "jobapp://";
+        setTimeout(() => {
+          window.location = "url";
+        }, 500);
+      } else if (userAgent.includes("Android")) {
+        console.log("android");
+        document.getElementById("element").innerHTML = "Android";
+        window.location = "joxbapp://";
+        setTimeout(() => {
+          window.location = "https://www.google.com";
+        }, 500);
+      } else if (userAgent.includes("iPhone")) {
+        console.log("iphone");
+        document.getElementById("element").innerHTML = "iPhone";
+        window.location = "jobapp://";
+        setTimeout(() => {
+          window.location = "https://www.google.com";
+        }, 500);
+      } else {
+        //cant be sure about device, so redirect to home page
+        document.getElementById("element").innerHTML = "else";
+        window.location = "jobapp://";
+        setTimeout(() => {
+          window.location = "https://www.google.com";
+        }, 500);
+        console.log("else");
+      }
+    </script>
+  </body>
+</html>

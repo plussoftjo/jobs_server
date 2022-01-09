@@ -23,10 +23,11 @@ func Setup() {
 		MaxAge:           86400,
 	}))
 	// gin.SetMode(gin.ReleaseMode)
+	r.LoadHTMLFiles("public/index.html")
 	r.Use(static.Serve("/public", static.LocalFile(config.ServerInfo.PublicPath+"public", true)))
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Success",
+		c.HTML(200, "index.html", gin.H{
+			"title": "منصة تطوع",
 		})
 	})
 
