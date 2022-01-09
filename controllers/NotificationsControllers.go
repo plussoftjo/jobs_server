@@ -91,7 +91,7 @@ func StoreNotificationToken(c *gin.Context) {
 	var data models.NotificationTokens
 	c.ShouldBindJSON(&data)
 
-	config.DB.Create(&data)
+	config.DB.Where("token = ?", data.Token).FirstOrCreate(&data)
 
 	c.JSON(200, gin.H{"message": "success"})
 }
